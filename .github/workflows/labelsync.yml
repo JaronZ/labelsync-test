@@ -1,0 +1,21 @@
+name: Automatic Label Sync
+
+on:
+  workflow_dispatch:
+
+jobs:
+  label_sync:
+    name: Automatic Label Synchronization
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      issues: write
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
+        with:
+          sparse-checkout: .github/labels.yml
+          sparse-checkout-cone-mode: false
+          repository: JaronZ/labelsync-test
+      - name: Run Label Sync
+        uses: compairifuel/.github/actions/labelsync@8-feat-replace-current-label-sync-action-with-a-custom-action
